@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Year | Arisha</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <title>Thinking of You | Arisha ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --akashi: #87CEEB;
-            --babypink: #FFB6C1;
-            --gold: #FFD700;
-        }
-
+        /* Animated Gradient Background */
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             overflow: hidden; font-family: 'Poppins', sans-serif;
             background: linear-gradient(-45deg, #e0f7fa, #fce4ec, #b2ebf2, #f8bbd0);
             background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
+            animation: gradientMove 12s ease infinite;
         }
 
         @keyframes gradientMove {
@@ -26,52 +21,49 @@
             100% { background-position: 0% 50%; }
         }
 
-        .chandelier-container {
-            position: absolute; top: 0; width: 100%;
-            display: flex; justify-content: space-around; z-index: 10;
+        /* Mouse Trail Particles */
+        .trail {
+            position: absolute; width: 8px; height: 8px;
+            border-radius: 50%; pointer-events: none;
+            animation: fade 0.8s ease-out forwards;
+            z-index: 10;
         }
 
-        .jharbati {
-            width: 2px; height: 100px; background: var(--gold);
-            position: relative; transition: all 1.5s ease-in;
+        @keyframes fade {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(3.5); opacity: 0; }
         }
 
-        .jharbati::after {
-            content: '🕯️'; position: absolute; bottom: -15px; left: -10px;
-            filter: drop-shadow(0 0 10px var(--gold)); font-size: 20px;
+        .center-card {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); text-align: center;
+            z-index: 100; width: 90%; max-width: 400px;
         }
 
-        .heart {
-            position: absolute; top: -20px;
-            pointer-events: none; animation: heartFall linear forwards;
+        h1 {
+            font-family: 'Dancing Script', cursive; font-size: 4rem;
+            color: #ec407a; margin: 0; text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+            transition: all 0.6s ease;
         }
 
-        @keyframes heartFall {
-            to { transform: translateY(105vh) rotate(360deg); }
-        }
+        .sub-text { color: #555; font-size: 1rem; margin-top: 10px; font-weight: 300; }
 
-        .content {
-            position: relative; z-index: 100; text-align: center;
-            margin-top: 25vh;
-        }
-
-        h1 { font-size: 2rem; color: #555; font-weight: 300; margin:0; }
-        .name { 
-            font-family: 'Dancing Script', cursive; font-size: 5.5rem; 
-            color: #ec407a; display: block; text-shadow: 2px 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .magic-btn {
-            background: white; color: #ec407a; border: 2px solid #ec407a;
-            padding: 12px 40px; font-size: 1.1rem; border-radius: 30px;
-            cursor: pointer; transition: 0.4s; font-weight: 600; margin-top: 30px;
+        .secret-btn {
+            background: white; color: #ec407a; border: 1.5px solid #ec407a;
+            padding: 12px 30px; border-radius: 25px; cursor: pointer;
+            margin-top: 30px; transition: 0.4s; font-weight: 600;
             box-shadow: 0 4px 15px rgba(236, 64, 122, 0.2);
         }
 
-        .magic-btn:hover { background: #ec407a; color: white; transform: scale(1.05); }
+        .secret-btn:hover { background: #ec407a; color: white; transform: translateY(-3px); }
 
-        #final-wish {
-            display: none; margin-top: 20px; animation: fadeIn 2s;
+        #message-box {
+            display: none; margin-top: 25px; color: #444;
+            line-height: 1.7; font-size: 1.15rem;
+            background: rgba(255, 255, 255, 0.5); padding: 25px;
+            border-radius: 20px; backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 1.5s ease;
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -79,61 +71,52 @@
 </head>
 <body>
 
-    <div class="chandelier-container" id="chandeliers">
-        <div class="jharbati" style="height: 120px;"></div>
-        <div class="jharbati" style="height: 160px;"></div>
-        <div class="jharbati" style="height: 100px;"></div>
-        <div class="jharbati" style="height: 140px;"></div>
+    <div class="center-card">
+        <h1 id="title">Hey Arisha...</h1>
+        <p class="sub-text">I was just thinking about something.</p>
+        <button class="secret-btn" onclick="showSecret()">Click to read</button>
+        <div id="message-box"></div>
     </div>
 
-    <div class="content">
-        <h1>Hello,</h1>
-        <span class="name">Arisha</span>
-        <button class="magic-btn" onclick="revealMagic()">Click for Surprise</button>
-        
-        <div id="final-wish">
-            <h2 style="color: #007c91;">✨ Happy New Year 2026 ✨</h2>
-            <p style="color: #666; font-size: 1.2rem;">Wishing you a year full of light and laughter.</p>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = Math.random() > 0.5 ? '❤️' : '🩵';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = (Math.random() * 12 + 10) + 'px';
-            heart.style.opacity = Math.random() * 0.7 + 0.3;
-            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 7000);
-        }
-        setInterval(createHeart, 250);
-
-        function revealMagic() {
-            const jharbatis = document.querySelectorAll('.jharbati');
-            jharbatis.forEach(j => {
-                j.style.top = '100vh';
-                j.style.opacity = '0';
-            });
-
-            document.getElementById('final-wish').style.display = 'block';
-            document.querySelector('.magic-btn').style.display = 'none';
-
-            var count = 200;
-            var defaults = { origin: { y: 0.7 } };
-
-            function fire(particleRatio, opts) {
-                confetti(Object.assign({}, defaults, opts, {
-                    particleCount: Math.floor(count * particleRatio)
-                }));
+        // Interactive Particle Trail
+        document.addEventListener('mousemove', function(e) {
+            for(let i=0; i<2; i++) { // Creates a denser trail
+                let trail = document.createElement('div');
+                trail.classList.add('trail');
+                // Random position offset for a natural look
+                let x = e.pageX + (Math.random() * 10 - 5);
+                let y = e.pageY + (Math.random() * 10 - 5);
+                trail.style.left = x + 'px';
+                trail.style.top = y + 'px';
+                
+                // Colors: Mix of Akashi, Baby Pink, and White
+                const colors = ['#87CEEB', '#FFB6C1', '#FFFFFF'];
+                trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                document.body.appendChild(trail);
+                setTimeout(() => trail.remove(), 800);
             }
+        });
 
-            fire(0.25, { spread: 26, startVelocity: 55, colors: ['#87CEEB', '#FFB6C1'] });
-            fire(0.2, { spread: 60, colors: ['#FFD700'] });
-            fire(0.35, { spread: 100, decay: 0.91, scalar: 1.2 });
+        // Typewriter Effect
+        const secretText = "No special reason, just wanted to say that you're an amazing person. I hope your day is as wonderful as you are! ✨";
+        let charIndex = 0;
+
+        function showSecret() {
+            document.querySelector('.secret-btn').style.display = 'none';
+            document.getElementById('title').style.fontSize = '2.8rem';
+            const box = document.getElementById('message-box');
+            box.style.display = 'block';
+            
+            function type() {
+                if (charIndex < secretText.length) {
+                    box.innerHTML += secretText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, 50);
+                }
+            }
+            type();
         }
     </script>
 </body>
